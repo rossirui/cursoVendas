@@ -1,4 +1,4 @@
-package io.github.rossirui.domain.entity;
+package io.github.rossirui.domain.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
