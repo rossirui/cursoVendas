@@ -1,5 +1,6 @@
 package io.github.rossirui.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.github.rossirui.domain.enums.TipoCliente;
 import org.graalvm.compiler.lir.alloc.lsra.LinearScan;
 
@@ -20,6 +21,7 @@ public class Cliente implements Serializable {
     private Integer tipo;
 
     @OneToMany(mappedBy = "cliente")
+    @JsonManagedReference
     private List<Endereco> enderecos = new ArrayList<>();
 
     @ElementCollection
