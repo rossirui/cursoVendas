@@ -2,7 +2,6 @@ package io.github.rossirui.domain.entities;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.github.rossirui.domain.enums.TipoCliente;
-import org.graalvm.compiler.lir.alloc.lsra.LinearScan;
 
 import javax.persistence.*;
 import java.io.Serializable;
