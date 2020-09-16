@@ -1,6 +1,6 @@
 package io.github.rossirui.domain.entities;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.github.rossirui.domain.enums.TipoCliente;
 
 import javax.persistence.*;
@@ -20,13 +20,13 @@ public class Cliente implements Serializable {
     private Integer tipo;
 
     @OneToMany(mappedBy = "cliente")
-    @JsonManagedReference
     private List<Endereco> enderecos = new ArrayList<>();
 
     @ElementCollection
     @CollectionTable(name = "TELEFONE")
     private Set<String> telefones = new HashSet<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
 
