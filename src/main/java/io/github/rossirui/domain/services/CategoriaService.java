@@ -6,6 +6,9 @@ import io.github.rossirui.domain.services.exceptions.LocalDataIntegrityViolation
 import io.github.rossirui.domain.services.exceptions.LocalObjectNotFoudException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,6 +46,11 @@ public class CategoriaService {
     }
     public List<Categoria> buscar() {
         return categoriaRepository.findAll();
+    }
+
+    public Page<Categoria> buscarPagina(Integer pagina, Integer linhasPorPagina, String direcao, String ordenarPor) {
+        PageRequest pageRequest = PageRequest.of(pagina, linhasPorPagina, Sort.Direction.valueOf(direcao), ordenarPor);
+        return categoriaRepository.findAll(pageRequest);
     }
 
 }
