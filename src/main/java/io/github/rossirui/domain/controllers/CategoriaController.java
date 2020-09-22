@@ -17,7 +17,7 @@ public class CategoriaController {
     private CategoriaService categoriaService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> buscarPorId(@PathVariable Integer id) {
+    public ResponseEntity<Categoria> buscarPorId(@PathVariable Integer id) {
         Categoria categoria = categoriaService.buscarPorId(id);
         return ResponseEntity.ok().body(categoria);
     }
@@ -31,5 +31,12 @@ public class CategoriaController {
                 .buildAndExpand(obj.getId())
                 .toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Void> atualizar(@RequestBody Categoria obj, @PathVariable Integer id) {
+        obj.setId(id);
+        categoriaService.atualizar(obj);
+        return ResponseEntity.noContent().build();
     }
 }
