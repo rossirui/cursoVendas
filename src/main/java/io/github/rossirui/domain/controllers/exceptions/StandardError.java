@@ -1,11 +1,11 @@
 package io.github.rossirui.domain.controllers.exceptions;
 
-public class StardardError {
+public class StandardError {
     private Integer status;
     private String mensagem;
     private Long timeStamp;
 
-    public StardardError(Integer status, String mensagem, Long timeStamp) {
+    public StandardError(Integer status, String mensagem, Long timeStamp) {
         this.status = status;
         this.mensagem = mensagem;
         this.timeStamp = timeStamp;

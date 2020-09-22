@@ -2,8 +2,10 @@ package io.github.rossirui.domain.services;
 
 import io.github.rossirui.domain.entities.Categoria;
 import io.github.rossirui.domain.repositories.CategoriaRepository;
+import io.github.rossirui.domain.services.exceptions.LocalDataIntegrityViolationException;
 import io.github.rossirui.domain.services.exceptions.LocalObjectNotFoudException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -28,5 +30,14 @@ public class CategoriaService {
     public Categoria atualizar(Categoria obj) {
         buscarPorId(obj.getId());
         return categoriaRepository.save(obj);
+    }
+
+    public void deletar(Integer id) {
+        buscarPorId(id);
+        try {
+            categoriaRepository.deleteById(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new LocalDataIntegrityViolationException("Não é possível excluir uma categoria que possui produtos.");
+        }
     }
 }
