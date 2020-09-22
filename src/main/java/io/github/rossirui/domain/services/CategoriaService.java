@@ -19,4 +19,9 @@ public class CategoriaService {
         return categoria.orElseThrow(() -> new LocalObjectNotFoudException(
                 "Objeto não encontrado! Id: " + id + ", tipo: " + Categoria.class.getName()));
     }
+
+    public Categoria inserir(Categoria obj) {
+        obj.setId(null);
+        return categoriaRepository.save(obj);
+    }
 }

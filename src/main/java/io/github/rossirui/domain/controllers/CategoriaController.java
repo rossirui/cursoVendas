@@ -3,13 +3,11 @@ package io.github.rossirui.domain.controllers;
 import io.github.rossirui.domain.entities.Categoria;
 import io.github.rossirui.domain.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.persistence.EntityManager;
-import java.util.ArrayList;
-import java.util.List;
+import java.net.URI;
 
 @RestController
 @RequestMapping(value = "/categorias")
@@ -22,5 +20,16 @@ public class CategoriaController {
     public ResponseEntity<?> buscarPorId(@PathVariable Integer id) {
         Categoria categoria = categoriaService.buscarPorId(id);
         return ResponseEntity.ok().body(categoria);
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Void> inserir(@RequestBody Categoria obj) {
+        obj = categoriaService.inserir(obj);
+        URI uri = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(obj.getId())
+                .toUri();
+        return ResponseEntity.created(uri).build();
     }
 }
